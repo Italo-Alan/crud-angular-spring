@@ -1,0 +1,12 @@
+[
+  {"_id": "1", "name": "HTML", "category": "Front-End"},
+  {"_id": "2", "name": "CSS", "category": "Front-End"},
+  {"_id": "3", "name": "Javascript", "category": "Front-End"},
+  {"_id": "4", "name": "Angular", "category": "Front-End"},
+  {"_id": "5", "name": "React", "category": "Front-End"},
+  {"_id": "6", "name": "NodeJs", "category": "Back-End"},
+  {"_id": "7", "name": "Java", "category": "Back-End"},
+  {"_id": "8", "name": "Spring Boot", "category": "Back-End"},
+  {"_id": "9", "name": "MongoDB", "category": "Data Base"},
+  {"_id": "10", "name": "PostgreSQL", "category": "Data Base"}
+]
