@@ -13,7 +13,7 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 export class CoursesComponent {
   //O dolar no final indica que essa variável é um Observable
   courses$: Observable<Course[]>;
-  displayedColumns = ['name', 'category'];
+  displayedColumns = ['_id','name', 'category'];
 
   constructor(
     private courseService : CoursesService,
