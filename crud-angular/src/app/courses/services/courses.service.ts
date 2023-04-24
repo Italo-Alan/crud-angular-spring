@@ -18,7 +18,7 @@ export class CoursesService {
         //Obtém a primeira resposta do servidor e finaliza o processo.
         first(),
         //Podemos usar o delay para testar o Spinner no carregamento da página.
-        delay(3000),
+        // delay(3000),
         tap(courses => console.log(courses))
       );
   }

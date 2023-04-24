@@ -17,7 +17,7 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonProperty("_id")
+    // @JsonProperty("_id")
     private Long id;
 
     // @Column(name = "nome") É usado quando o nome da coluna que declaramos aqui é diferente da que temos no BD.
