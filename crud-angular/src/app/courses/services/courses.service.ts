@@ -22,4 +22,9 @@ export class CoursesService {
         tap(courses => console.log(courses))
       );
   }
+
+  //Além de passar o que vamos enviar, devemos colocar como parâmetro os dados que irão no corpo
+  save(record: Course){
+    return this.httpClient.post<Course>(this.API, record);
+  }
 }
