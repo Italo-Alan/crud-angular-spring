@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NonNullableFormBuilder, UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
@@ -11,18 +11,18 @@ import { Location } from '@angular/common';
 })
 export class CourseFormComponent {
 
-  form: FormGroup;
+  form = this.formBuilder.group({
+    name: new FormControl<string>('', {nonNullable: true}),
+    category: ['']
+  });
 
   constructor(
-    private formBuilder: FormBuilder,
+    //Aplica o NonNulable para todos os campos
+    private formBuilder: NonNullableFormBuilder,
     private service: CoursesService,
     private snackBar: MatSnackBar,
-    private location: Location
-    ){
-    this.form = this.formBuilder.group({
-      name: [null],
-      category: [null]
-    })
+    private location: Location){
+
   }
 
   openSnackBar(message: string, action: string) {
@@ -30,7 +30,6 @@ export class CourseFormComponent {
   }
 
   onSubmit(){
-    console.log(this.form.value);
     //É necessário se inscrever em um Observable
     this.service.save(this.form.value)
       .subscribe( result => { this.onSucess()}, error => { this.onError() });
