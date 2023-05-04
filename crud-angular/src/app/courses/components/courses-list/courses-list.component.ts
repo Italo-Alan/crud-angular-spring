@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CoursesListComponent {
   @Input() courses: Course[] = [];
   @Output() add = new EventEmitter(false);
+  @Output() edit = new EventEmitter(false);
 
   //Readonly permite que não seja possível mais fazer modificações
   readonly displayedColumns = ['name', 'category', 'actions'];
@@ -18,5 +19,9 @@ export class CoursesListComponent {
 
   onAdd(){
     this.add.emit(true);
+  }
+
+  onEdit(course: Course){
+    this.edit.emit(course);
   }
 }
