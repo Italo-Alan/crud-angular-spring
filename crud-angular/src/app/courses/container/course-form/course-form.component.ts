@@ -31,12 +31,12 @@ export class CourseFormComponent{
   ngOnInit(): void {
     const course: Course = this.route.snapshot.data['course'];
     console.log(course);
-    this.form.patchValue({
+    this.form.setValue({
       name: course.name,
-    });
-    this.form.patchValue({
       category: course.category,
+      _id: course._id,
     });
+
 
   }
 
