@@ -59,11 +59,11 @@ public class CursosController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id){
         return courseRepository.findById(id)
         .map(recordFound -> {
             courseRepository.deleteById(id);
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().<Void>build();
         })
         .orElse(ResponseEntity.notFound().build());
     }
