@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.italo.exception.RecordNotFoundException;
 import com.italo.model.Course;
 import com.italo.repository.CourseRepository;
 
@@ -31,29 +32,32 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Optional<Course> findById(@PathVariable @NotNull @Positive Long id){
-        return courseRepository.findById(id);
+    public Course findById(@PathVariable @NotNull @Positive Long id){
+        return courseRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public Course create(@RequestBody @Valid Course course){
         return courseRepository.save(course);
     }
 
-    public Optional<Course> update(@NotNull @Positive Long id, @Valid Course course){
+    public Course update(@NotNull @Positive Long id, @Valid Course course){
     return courseRepository.findById(id)
         .map(recordFound -> {
             recordFound.setName(course.getName());
             recordFound.setCategory(course.getCategory());
             return courseRepository.save(recordFound);
-        });
+        }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public boolean delete(@PathVariable @NotNull @Positive Long id){
-        return courseRepository.findById(id)
-        .map(recordFound -> {
-            courseRepository.deleteById(id);
-            return true;
-        })
-        .orElse(false);
+    public void delete(@PathVariable @NotNull @Positive Long id){
+        courseRepository.delete(courseRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id)));
+
+        //Pode ser feita assim
+        // return courseRepository.findById(id)
+        // .map(recordFound -> {
+        //     courseRepository.deleteById(id);
+        //     return true;
+        // })
+        // .orElse(false);
     }
 }
