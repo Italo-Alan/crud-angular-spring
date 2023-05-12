@@ -3,7 +3,6 @@ package com.italo.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.italo.model.Course;
-import com.italo.repository.CourseRepository;
+import com.italo.dto.CourseDTO;
 import com.italo.service.CourseService;
 
 import jakarta.validation.Valid;
@@ -37,12 +35,12 @@ public class CursosController {
     }
 
     @GetMapping()
-    public @ResponseBody List<Course> list(){
+    public @ResponseBody List<CourseDTO> list(){
         return courseService.list();
     }
 
     @GetMapping("/{id}")
-    public Course findById(@PathVariable @NotNull @Positive Long id){
+    public CourseDTO findById(@PathVariable @NotNull @Positive Long id){
         //Verifica primeiro se o curso existe
         return courseService.findById(id);
             // .map(recordFound -> ResponseEntity.ok().body(recordFound))
@@ -51,13 +49,13 @@ public class CursosController {
 
     //Ele só persiste no banco se estiver tudo válido
     @PostMapping()
-    public Course create(@RequestBody @Valid Course course){
+    public CourseDTO create(@RequestBody @Valid CourseDTO course){
         return courseService.create(course);
     }
 
     @PutMapping("/{id}")
-    public Course update(@PathVariable @NotNull @Positive Long id, 
-            @RequestBody @Valid  Course course){
+    public CourseDTO update(@PathVariable @NotNull @Positive Long id, 
+            @RequestBody @Valid  CourseDTO course){
         return courseService.update(id, course);
     }
 
