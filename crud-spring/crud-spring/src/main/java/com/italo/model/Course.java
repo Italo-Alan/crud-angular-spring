@@ -5,9 +5,14 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.italo.enums.Category;
+import com.italo.enums.converters.CategoryConverter;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,10 +41,9 @@ public class Course {
     private String name;
 
     @NotNull
-    @Length(max = 10)
-    @Pattern(regexp = "Front-End|Back-End|Full-Stack|Database|DevOps|Database")
-    @Column(length = 20, nullable = false)
-    private String category;
+    @Column(length = 10, nullable = false)
+    @Convert(converter = CategoryConverter.class)
+    private Category category;
     
     @NotNull
     @Length(max = 10)
