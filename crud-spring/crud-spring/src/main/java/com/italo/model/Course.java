@@ -6,7 +6,9 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.italo.enums.Category;
+import com.italo.enums.Status;
 import com.italo.enums.converters.CategoryConverter;
+import com.italo.enums.converters.StatusConverter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -46,8 +48,7 @@ public class Course {
     private Category category;
     
     @NotNull
-    @Length(max = 10)
-    @Pattern(regexp = "Active|Inactive")
+    @Convert(converter = StatusConverter.class)
     @Column(length = 15, nullable = false)
-    private String status = "Active";
+    private Status status = Status.ACTIVE;
 }

@@ -35,7 +35,7 @@ public class CursosController {
     }
 
     @GetMapping()
-    public @ResponseBody List<CourseDTO> list(){
+    public List<CourseDTO> list(){
         return courseService.list();
     }
 
