@@ -1,8 +1,12 @@
 package com.italo.dto.mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Component;
 
 import com.italo.dto.CourseDTO;
+import com.italo.dto.LessonDTO;
 import com.italo.enums.Category;
 import com.italo.model.Course;
 
@@ -12,8 +16,11 @@ public class CourseMapper {
         if(course == null){
             return null;
         }
+        List<LessonDTO> lessons = course.getLessons().stream()
+            .map(lesson -> new LessonDTO(lesson.getId(), lesson.getName(), lesson.getYoutubeUrl()))
+            .collect(Collectors.toList());
         return new CourseDTO(course.getId(), course.getName(), course.getCategory().getValue(),
-                course.getLessons());
+                lessons);
     }
 
     public Course toEntity(CourseDTO courseDTO){
